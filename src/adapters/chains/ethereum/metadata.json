@@ -1,0 +1,20 @@
+{
+  "id": "ethereum",
+  "name": "Ethereum Mainnet",
+  "version": "1.0.0",
+  "description": "Ethereum proof-of-stake blockchain node plugin supporting Execution (Geth) and Consensus (Prysm) client stacks.",
+  "supportedTypes": ["validator", "full", "rpc"],
+  "defaultPort": 8545,
+  "minSpecs": {
+    "cpu": 4,
+    "ram": 16,
+    "disk": 1000
+  },
+  "files": {
+    "deploy": "deploy.sh",
+    "update": "update.sh",
+    "health": "health.sh",
+    "backup": "backup.sh",
+    "restore": "restore.sh"
+  }
+}

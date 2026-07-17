@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # ------------------------------------------------------------------
+  # NodePilot AI Custom Backend Engine
+  # ------------------------------------------------------------------
+  nodepilot-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodepilot-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/nodepilot
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=production_super_secret_jwt_hash_key_v1
+      - JWT_REFRESH_SECRET=production_super_secret_refresh_jwt_hash_key_v1
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - nodepilot-network
+
+  # ------------------------------------------------------------------
+  # MongoDB High-Performance Database
+  # ------------------------------------------------------------------
+  mongodb:
+    image: mongo:6.0-jammy
+    container_name: nodepilot-mongodb
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nodepilot-network
+
+  # ------------------------------------------------------------------
+  # Redis Queue Broker (BullMQ)
+  # ------------------------------------------------------------------
+  redis:
+    image: redis:7.2-alpine
+    container_name: nodepilot-redis
+    restart: always
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nodepilot-network
+
+networks:
+  nodepilot-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local

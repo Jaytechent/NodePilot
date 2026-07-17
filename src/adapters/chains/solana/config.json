@@ -1,0 +1,10 @@
+{
+  "network": "mainnet-beta",
+  "validatorImage": "solanalabs/solana:v1.18.11",
+  "ports": {
+    "rpc": 8899,
+    "gossip": 8001,
+    "tpu": 8003
+  },
+  "enableGpu": false
+}

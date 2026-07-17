@@ -1,0 +1,20 @@
+{
+  "id": "solana",
+  "name": "Solana Mainnet",
+  "version": "1.0.0",
+  "description": "Solana validator and RPC node stack running official solana-validator container configurations.",
+  "supportedTypes": ["validator", "rpc"],
+  "defaultPort": 8899,
+  "minSpecs": {
+    "cpu": 16,
+    "ram": 128,
+    "disk": 2000
+  },
+  "files": {
+    "deploy": "deploy.sh",
+    "update": "update.sh",
+    "health": "health.sh",
+    "backup": "backup.sh",
+    "restore": "restore.sh"
+  }
+}

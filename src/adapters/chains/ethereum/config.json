@@ -1,0 +1,13 @@
+{
+  "network": "mainnet",
+  "executionClient": "geth",
+  "consensusClient": "prysm",
+  "gethImage": "ethereum/client-go:v1.13.15",
+  "prysmImage": "prysmaticlabs/prysm-validator:v5.0.3",
+  "ports": {
+    "rpc": 8545,
+    "ws": 8546,
+    "p2p": 30303
+  },
+  "syncMode": "snap"
+}

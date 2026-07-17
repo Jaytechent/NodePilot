@@ -1,0 +1,8 @@
+{
+  "name": "Remix: NodePilot AI Backend",
+  "description": "Production-grade, clean architecture backend for NodePilot AI SaaS platform. Exposes a REST API, BullMQ queues, SSH automation, WebSocket updates, and Swagger docs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
